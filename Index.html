@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nebula — Unique One‑Page Website</title>
+  <meta name="description" content="A unique, modern, responsive one‑page website template with smooth animations and dark mode. Single-file HTML/CSS/JS." />
+  <meta property="og:title" content="Nebula — Unique One‑Page Website" />
+  <meta property="og:description" content="Modern, responsive, animated, and accessible. Copy → paste → customize." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.06);
+      --text: #eaf2ff;
+      --muted: #9db0c9;
+      --brand: #7c3aed;
+      --brand-2: #0ea5e9;
+      --ring: rgba(14,165,233,.65);
+      --card: rgba(255,255,255,.04);
+      --shadow: 0 10px 35px rgba(0,0,0,.28);
+      --radius: 22px;
+      --maxw: 1200px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fbff;
+        --panel: rgba(0, 41, 74, 0.06);
+        --text: #0d1b2a;
+        --muted: #465a6e;
+        --card: rgba(0,0,0,.035);
+        --shadow: 0 10px 35px rgba(2, 34, 62, .12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 75% -10%, rgba(124,58,237,.28), transparent 60%),
+                  radial-gradient(1200px 800px at -10% 80%, rgba(14,165,233,.28), transparent 60%),
+                  var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .container { width: min(100% - 2rem, var(--maxw)); margin-inline: auto; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
+    .brand {
+      display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; letter-spacing: .3px;
+    }
+    .brand svg { filter: drop-shadow(0 4px 10px rgba(124,58,237,.45)); }
+    .links { display: flex; gap: .6rem; align-items: center; }
+    .links a { padding: .6rem .9rem; border-radius: 999px; color: var(--muted); }
+    .links a:hover { color: var(--text); background: var(--panel); }
+    .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); box-shadow: var(--shadow); }
+    .btn.primary { border: 1px solid rgba(124,58,237,.6); background: linear-gradient(180deg, rgba(124,58,237,.85), rgba(14,165,233,.85)); color: white; }
+
+    .menu { display: none; }
+    @media (max-width: 840px) {
+      .links { display: none; }
+      .menu { display: inline-flex; }
+      nav.open .links { position: absolute; inset: 60px 1rem auto; display: grid; gap: .5rem; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.1); padding: .6rem; border-radius: 14px; backdrop-filter: blur(12px); }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 0 4rem; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .6rem; border-radius: 999px; background: var(--panel); color: var(--muted); border: 1px solid rgba(255,255,255,.08); }
+    .title { font-size: clamp(2rem, 6vw + .5rem, 4.2rem); line-height: 1.05; margin: 1rem 0; font-weight: 800; letter-spacing: -0.02em; }
+    .title .gradient { background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: clamp(1rem, 1.2vw + .9rem, 1.25rem); color: var(--muted); max-width: 70ch; margin: 0 auto 1.4rem; }
+    .cta { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; margin-top: 1.2rem; }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.2rem; }
+    .feat { grid-column: span 4; }
+    @media (max-width: 1000px) { .feat { grid-column: span 6; } }
+    @media (max-width: 640px) { .feat { grid-column: span 12; } }
+    .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(14,165,233,.3)); border: 1px solid rgba(255,255,255,.15); }
+
+    /* Showcase */
+    .showcase .item { grid-column: span 6; position: relative; overflow: hidden; }
+    @media (max-width: 840px) { .showcase .item { grid-column: span 12; } }
+    .mock { aspect-ratio: 16/10; border-radius: var(--radius); background: linear-gradient(135deg, rgba(124,58,237,.25), rgba(14,165,233,.25)); border: 1px solid rgba(255,255,255,.12); position: relative; overflow: hidden; }
+    .mock:before { content: ""; position: absolute; inset: -40% -20% auto; height: 80%; background: radial-gradient(closest-side, rgba(255,255,255,.6), transparent 70%); transform: rotate(25deg); filter: blur(20px); }
+
+    /* Pricing */
+    .pricing .plan { grid-column: span 4; position: relative; overflow: hidden; }
+    @media (max-width: 1000px) { .pricing .plan { grid-column: span 6; } }
+    @media (max-width: 640px) { .pricing .plan { grid-column: span 12; } }
+    .plan.featured { outline: 2px solid var(--ring); }
+    .price { font-weight: 800; font-size: 2rem; }
+    .muted { color: var(--muted); }
+
+    /* FAQ */
+    .faq details { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1rem 1.2rem; background: var(--card); }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq details + details { margin-top: .8rem; }
+
+    /* Contact */
+    form { display: grid; gap: .8rem; }
+    input, textarea { width: 100%; padding: .9rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); color: var(--text); outline: none; }
+    input:focus, textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 6px rgba(14,165,233,.12); }
+
+    /* Footer */
+    footer { padding: 2.5rem 0 3rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Animations */
+    [data-reveal] { opacity: 0; transform: translateY(14px); transition: .6s ease; }
+    [data-reveal].visible { opacity: 1; transform: none; }
+
+    /* Utility */
+    .center { text-align: center; }
+    .pill { padding: .4rem .7rem; border-radius: 999px; background: var(--panel); border: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Nebula Home">
+          <!-- Simple SVG mark -->
+          <svg width="28" height="28" viewBox="0 0 60 60" aria-hidden="true" role="img" fill="none">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7c3aed"/>
+                <stop offset="1" stop-color="#0ea5e9"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="48" height="48" rx="12" stroke="url(#g)" stroke-width="4"/>
+            <circle cx="30" cy="30" r="10" fill="url(#g)"/>
+          </svg>
+          <span>Nebula</span>
+        </a>
+        <div class="links" role="menubar">
+          <a role="menuitem" href="#about">About</a>
+          <a role="menuitem" href="#work">Work</a>
+          <a role="menuitem" href="#pricing">Pricing</a>
+          <a role="menuitem" href="#faq">FAQ</a>
+          <a role="menuitem" href="#contact" class="pill">Contact</a>
+        </div>
+        <div style="display:flex; gap:.5rem; align-items:center;">
+          <button class="btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">🌓</button>
+          <button class="btn menu" id="menu" aria-expanded="false" aria-controls="mobile">☰</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="hero">
+      <div class="container" data-reveal>
+        <span class="eyebrow">🚀 Unique • Responsive • Single‑file</span>
+        <h1 class="title">Build something <span class="gradient">beautiful</span> & fast.</h1>
+        <p class="sub">Nebula is a clean, modern one‑page layout with glassy cards, smooth reveal animations, dark mode, and zero dependencies. Copy the file, change the content, ship your site.</p>
+        <div class="cta">
+          <a href="#about" class="btn primary">Get Started</a>
+          <a href="#work" class="btn" aria-label="See our work examples">See Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="about">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Why choose Nebula?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Thoughtful features, zero bloat</h2>
+        </div>
+        <div class="grid">
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Fast & Lightweight</h3>
+            <p class="muted">Under a few KB of custom CSS with no frameworks. Loads quickly on any device.
+            </p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🎯</div>
+            <h3>Accessible</h3>
+            <p class="muted">Semantic HTML, clear focus styles, and ARIA where it matters for great UX.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🌗</div>
+            <h3>Dark Mode</h3>
+            <p class="muted">Respects system preference and lets users toggle anytime.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧩</div>
+            <h3>Modular Sections</h3>
+            <p class="muted">Swap blocks in or out: showcase, pricing, testimonials, FAQ, and contact.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <h3>SEO‑Ready</h3>
+            <p class="muted">Optimized meta tags, clean markup, and fast performance by default.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧪</div>
+            <h3>Pure HTML/CSS/JS</h3>
+            <p class="muted">One file, no build step. Perfect for quick launches and prototypes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section id="work" class="showcase">
+      <div class="container">
+        <div class="grid">
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Project Aurora</h3>
+              <p class="muted">Elegant SaaS landing with conversion‑focused sections and crisp CTAs.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Retail Prism</h3>
+              <p class="muted">Product grid with hover reveals, quick‑view, and delightful motion.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Course Atlas</h3>
+              <p class="muted">Education template with curriculum blocks and evergreen lead magnets.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Studio Folio</h3>
+              <p class="muted">Minimal portfolio with case studies, process, and client testimonials.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Simple, transparent pricing</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Pick a plan, own your site</h2>
+        </div>
+        <div class="grid">
+          <div class="card plan" data-reveal>
+            <h3>Starter</h3>
+            <p class="muted">Great for personal sites</p>
+            <p class="price">₹0</p>
+            <ul class="muted">
+              <li>Single‑file HTML</li>
+              <li>Responsive layout</li>
+              <li>Light/Dark mode</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Get it</a>
+            </div>
+          </div>
+          <div class="card plan featured" data-reveal>
+            <h3>Pro</h3>
+            <p class="muted">For small businesses</p>
+            <p class="price">₹1,999</p>
+            <ul class="muted">
+              <li>All Starter features</li>
+              <li>Extra sections & icons</li>
+              <li>Email support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn primary" href="#contact">Upgrade</a>
+            </div>
+          </div>
+          <div class="card plan" data-reveal>
+            <h3>Ultimate</h3>
+            <p class="muted">For agencies</p>
+            <p class="price">₹4,999</p>
+            <ul class="muted">
+              <li>Unlimited projects</li>
+              <li>Custom components</li>
+              <li>Priority support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Contact sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section>
+      <div class="container">
+        <blockquote class="card" style="font-size:1.1rem;" data-reveal>
+          “We shipped our MVP in a single afternoon with Nebula. The animations and dark mode made it feel premium out of the box.”
+          <footer class="muted" style="margin-top:.6rem;">— Mira J., Product Designer</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <div class="container">
+        <div class="center" style="margin-bottom:1rem;" data-reveal>
+          <span class="pill">Got questions?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">FAQ</h2>
+        </div>
+        <details data-reveal>
+          <summary>Can I use this template commercially?</summary>
+          <p class="muted">Yes. Customize and reuse it across your projects. Attribution appreciated but not required.</p>
+        </details>
+        <details data-reveal>
+          <summary>How do I change colors and fonts?</summary>
+          <p class="muted">Tweak the <code>:root</code> CSS variables for colors and update the <code>font-family</code> on <code>body</code>.</p>
+        </details>
+        <details data-reveal>
+          <summary>Is there a backend for the contact form?</summary>
+          <p class="muted">This file is static. Hook it to services like Formspree or your own API. The demo JavaScript shows a success toast.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="grid">
+          <div class="card" style="grid-column: span 7;" data-reveal>
+            <h3>Let’s build your site</h3>
+            <p class="muted">Tell us a bit about your project and we’ll get back within 1 business day.</p>
+            <form id="contactForm">
+              <label>
+                <span class="muted">Name</span>
+                <input required name="name" placeholder="Your full name" />
+              </label>
+              <label>
+                <span class="muted">Email</span>
+                <input required type="email" name="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                <span class="muted">Message</span>
+                <textarea required name="message" rows="5" placeholder="What are you building?"></textarea>
+              </label>
+              <button class="btn primary" type="submit">Send message</button>
+            </form>
+          </div>
+          <aside class="card" style="grid-column: span 5;" data-reveal>
+            <h4>Contact details</h4>
+            <p class="muted">Prefer email? <a href="mailto:hello@example.com" class="pill">hello@example.com</a></p>
+            <p class="muted">We’re based in 🌏 India · Available globally</p>
+            <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+              <a class="btn" href="#" aria-label="Twitter">🐦</a>
+              <a class="btn" href="#" aria-label="Instagram">📸</a>
+              <a class="btn" href="#" aria-label="GitHub">🐙</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <small>© <span id="y"></span> Nebula. All rights reserved.</small>
+      <a href="#home" class="pill" aria-label="Back to top">↑ Back to top</a>
+    </div>
+  </footer>
+
+  <!-- Scripts (no dependencies) -->
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const nav = document.querySelector('header nav');
+    document.getElementById('menu').addEventListener('click', e => {
+      const open = nav.classList.toggle('open');
+      e.currentTarget.setAttribute('aria-expanded', String(open));
+    });
+
+    // Dark mode toggle with persistence
+    const themeBtn = document.getElementById('theme');
+    const key = 'nebula-theme';
+    const root = document.documentElement;
+    const setTheme = (mode) => {
+      if (mode === 'light') {
+        root.style.colorScheme = 'light';
+        document.body.dataset.theme = 'light';
+      } else {
+        root.style.colorScheme = 'dark';
+        document.body.dataset.theme = 'dark';
+      }
+      localStorage.setItem(key, mode);
+    };
+    const initial = localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(initial);
+    themeBtn.addEventListener('click', () => setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+    // Fake form submit demo
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const toast = document.createElement('div');
+      toast.textContent = 'Thanks! We\'ll be in touch soon.';
+      Object.assign(toast.style, {
+        position: 'fixed', inset: 'auto 0 20px 0', margin: '0 auto', width: 'fit-content',
+        background: 'linear-gradient(90deg, rgba(124,58,237,.95), rgba(14,165,233,.95))',
+        color: '#fff', padding: '.8rem 1rem', borderRadius: '999px', boxShadow: '0 15px 30px rgba(0,0,0,.35)', zIndex: 99
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2400);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nebula — Unique One‑Page Website</title>
+  <meta name="description" content="A unique, modern, responsive one‑page website template with smooth animations and dark mode. Single-file HTML/CSS/JS." />
+  <meta property="og:title" content="Nebula — Unique One‑Page Website" />
+  <meta property="og:description" content="Modern, responsive, animated, and accessible. Copy → paste → customize." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.06);
+      --text: #eaf2ff;
+      --muted: #9db0c9;
+      --brand: #7c3aed;
+      --brand-2: #0ea5e9;
+      --ring: rgba(14,165,233,.65);
+      --card: rgba(255,255,255,.04);
+      --shadow: 0 10px 35px rgba(0,0,0,.28);
+      --radius: 22px;
+      --maxw: 1200px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fbff;
+        --panel: rgba(0, 41, 74, 0.06);
+        --text: #0d1b2a;
+        --muted: #465a6e;
+        --card: rgba(0,0,0,.035);
+        --shadow: 0 10px 35px rgba(2, 34, 62, .12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 75% -10%, rgba(124,58,237,.28), transparent 60%),
+                  radial-gradient(1200px 800px at -10% 80%, rgba(14,165,233,.28), transparent 60%),
+                  var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .container { width: min(100% - 2rem, var(--maxw)); margin-inline: auto; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
+    .brand {
+      display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; letter-spacing: .3px;
+    }
+    .brand svg { filter: drop-shadow(0 4px 10px rgba(124,58,237,.45)); }
+    .links { display: flex; gap: .6rem; align-items: center; }
+    .links a { padding: .6rem .9rem; border-radius: 999px; color: var(--muted); }
+    .links a:hover { color: var(--text); background: var(--panel); }
+    .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); box-shadow: var(--shadow); }
+    .btn.primary { border: 1px solid rgba(124,58,237,.6); background: linear-gradient(180deg, rgba(124,58,237,.85), rgba(14,165,233,.85)); color: white; }
+
+    .menu { display: none; }
+    @media (max-width: 840px) {
+      .links { display: none; }
+      .menu { display: inline-flex; }
+      nav.open .links { position: absolute; inset: 60px 1rem auto; display: grid; gap: .5rem; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.1); padding: .6rem; border-radius: 14px; backdrop-filter: blur(12px); }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 0 4rem; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .6rem; border-radius: 999px; background: var(--panel); color: var(--muted); border: 1px solid rgba(255,255,255,.08); }
+    .title { font-size: clamp(2rem, 6vw + .5rem, 4.2rem); line-height: 1.05; margin: 1rem 0; font-weight: 800; letter-spacing: -0.02em; }
+    .title .gradient { background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: clamp(1rem, 1.2vw + .9rem, 1.25rem); color: var(--muted); max-width: 70ch; margin: 0 auto 1.4rem; }
+    .cta { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; margin-top: 1.2rem; }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.2rem; }
+    .feat { grid-column: span 4; }
+    @media (max-width: 1000px) { .feat { grid-column: span 6; } }
+    @media (max-width: 640px) { .feat { grid-column: span 12; } }
+    .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(14,165,233,.3)); border: 1px solid rgba(255,255,255,.15); }
+
+    /* Showcase */
+    .showcase .item { grid-column: span 6; position: relative; overflow: hidden; }
+    @media (max-width: 840px) { .showcase .item { grid-column: span 12; } }
+    .mock { aspect-ratio: 16/10; border-radius: var(--radius); background: linear-gradient(135deg, rgba(124,58,237,.25), rgba(14,165,233,.25)); border: 1px solid rgba(255,255,255,.12); position: relative; overflow: hidden; }
+    .mock:before { content: ""; position: absolute; inset: -40% -20% auto; height: 80%; background: radial-gradient(closest-side, rgba(255,255,255,.6), transparent 70%); transform: rotate(25deg); filter: blur(20px); }
+
+    /* Pricing */
+    .pricing .plan { grid-column: span 4; position: relative; overflow: hidden; }
+    @media (max-width: 1000px) { .pricing .plan { grid-column: span 6; } }
+    @media (max-width: 640px) { .pricing .plan { grid-column: span 12; } }
+    .plan.featured { outline: 2px solid var(--ring); }
+    .price { font-weight: 800; font-size: 2rem; }
+    .muted { color: var(--muted); }
+
+    /* FAQ */
+    .faq details { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1rem 1.2rem; background: var(--card); }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq details + details { margin-top: .8rem; }
+
+    /* Contact */
+    form { display: grid; gap: .8rem; }
+    input, textarea { width: 100%; padding: .9rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); color: var(--text); outline: none; }
+    input:focus, textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 6px rgba(14,165,233,.12); }
+
+    /* Footer */
+    footer { padding: 2.5rem 0 3rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Animations */
+    [data-reveal] { opacity: 0; transform: translateY(14px); transition: .6s ease; }
+    [data-reveal].visible { opacity: 1; transform: none; }
+
+    /* Utility */
+    .center { text-align: center; }
+    .pill { padding: .4rem .7rem; border-radius: 999px; background: var(--panel); border: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Nebula Home">
+          <!-- Simple SVG mark -->
+          <svg width="28" height="28" viewBox="0 0 60 60" aria-hidden="true" role="img" fill="none">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7c3aed"/>
+                <stop offset="1" stop-color="#0ea5e9"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="48" height="48" rx="12" stroke="url(#g)" stroke-width="4"/>
+            <circle cx="30" cy="30" r="10" fill="url(#g)"/>
+          </svg>
+          <span>Nebula</span>
+        </a>
+        <div class="links" role="menubar">
+          <a role="menuitem" href="#about">About</a>
+          <a role="menuitem" href="#work">Work</a>
+          <a role="menuitem" href="#pricing">Pricing</a>
+          <a role="menuitem" href="#faq">FAQ</a>
+          <a role="menuitem" href="#contact" class="pill">Contact</a>
+        </div>
+        <div style="display:flex; gap:.5rem; align-items:center;">
+          <button class="btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">🌓</button>
+          <button class="btn menu" id="menu" aria-expanded="false" aria-controls="mobile">☰</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="hero">
+      <div class="container" data-reveal>
+        <span class="eyebrow">🚀 Unique • Responsive • Single‑file</span>
+        <h1 class="title">Build something <span class="gradient">beautiful</span> & fast.</h1>
+        <p class="sub">Nebula is a clean, modern one‑page layout with glassy cards, smooth reveal animations, dark mode, and zero dependencies. Copy the file, change the content, ship your site.</p>
+        <div class="cta">
+          <a href="#about" class="btn primary">Get Started</a>
+          <a href="#work" class="btn" aria-label="See our work examples">See Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="about">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Why choose Nebula?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Thoughtful features, zero bloat</h2>
+        </div>
+        <div class="grid">
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Fast & Lightweight</h3>
+            <p class="muted">Under a few KB of custom CSS with no frameworks. Loads quickly on any device.
+            </p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🎯</div>
+            <h3>Accessible</h3>
+            <p class="muted">Semantic HTML, clear focus styles, and ARIA where it matters for great UX.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🌗</div>
+            <h3>Dark Mode</h3>
+            <p class="muted">Respects system preference and lets users toggle anytime.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧩</div>
+            <h3>Modular Sections</h3>
+            <p class="muted">Swap blocks in or out: showcase, pricing, testimonials, FAQ, and contact.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <h3>SEO‑Ready</h3>
+            <p class="muted">Optimized meta tags, clean markup, and fast performance by default.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧪</div>
+            <h3>Pure HTML/CSS/JS</h3>
+            <p class="muted">One file, no build step. Perfect for quick launches and prototypes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section id="work" class="showcase">
+      <div class="container">
+        <div class="grid">
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Project Aurora</h3>
+              <p class="muted">Elegant SaaS landing with conversion‑focused sections and crisp CTAs.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Retail Prism</h3>
+              <p class="muted">Product grid with hover reveals, quick‑view, and delightful motion.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Course Atlas</h3>
+              <p class="muted">Education template with curriculum blocks and evergreen lead magnets.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Studio Folio</h3>
+              <p class="muted">Minimal portfolio with case studies, process, and client testimonials.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Simple, transparent pricing</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Pick a plan, own your site</h2>
+        </div>
+        <div class="grid">
+          <div class="card plan" data-reveal>
+            <h3>Starter</h3>
+            <p class="muted">Great for personal sites</p>
+            <p class="price">₹0</p>
+            <ul class="muted">
+              <li>Single‑file HTML</li>
+              <li>Responsive layout</li>
+              <li>Light/Dark mode</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Get it</a>
+            </div>
+          </div>
+          <div class="card plan featured" data-reveal>
+            <h3>Pro</h3>
+            <p class="muted">For small businesses</p>
+            <p class="price">₹1,999</p>
+            <ul class="muted">
+              <li>All Starter features</li>
+              <li>Extra sections & icons</li>
+              <li>Email support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn primary" href="#contact">Upgrade</a>
+            </div>
+          </div>
+          <div class="card plan" data-reveal>
+            <h3>Ultimate</h3>
+            <p class="muted">For agencies</p>
+            <p class="price">₹4,999</p>
+            <ul class="muted">
+              <li>Unlimited projects</li>
+              <li>Custom components</li>
+              <li>Priority support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Contact sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section>
+      <div class="container">
+        <blockquote class="card" style="font-size:1.1rem;" data-reveal>
+          “We shipped our MVP in a single afternoon with Nebula. The animations and dark mode made it feel premium out of the box.”
+          <footer class="muted" style="margin-top:.6rem;">— Mira J., Product Designer</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <div class="container">
+        <div class="center" style="margin-bottom:1rem;" data-reveal>
+          <span class="pill">Got questions?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">FAQ</h2>
+        </div>
+        <details data-reveal>
+          <summary>Can I use this template commercially?</summary>
+          <p class="muted">Yes. Customize and reuse it across your projects. Attribution appreciated but not required.</p>
+        </details>
+        <details data-reveal>
+          <summary>How do I change colors and fonts?</summary>
+          <p class="muted">Tweak the <code>:root</code> CSS variables for colors and update the <code>font-family</code> on <code>body</code>.</p>
+        </details>
+        <details data-reveal>
+          <summary>Is there a backend for the contact form?</summary>
+          <p class="muted">This file is static. Hook it to services like Formspree or your own API. The demo JavaScript shows a success toast.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="grid">
+          <div class="card" style="grid-column: span 7;" data-reveal>
+            <h3>Let’s build your site</h3>
+            <p class="muted">Tell us a bit about your project and we’ll get back within 1 business day.</p>
+            <form id="contactForm">
+              <label>
+                <span class="muted">Name</span>
+                <input required name="name" placeholder="Your full name" />
+              </label>
+              <label>
+                <span class="muted">Email</span>
+                <input required type="email" name="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                <span class="muted">Message</span>
+                <textarea required name="message" rows="5" placeholder="What are you building?"></textarea>
+              </label>
+              <button class="btn primary" type="submit">Send message</button>
+            </form>
+          </div>
+          <aside class="card" style="grid-column: span 5;" data-reveal>
+            <h4>Contact details</h4>
+            <p class="muted">Prefer email? <a href="mailto:hello@example.com" class="pill">hello@example.com</a></p>
+            <p class="muted">We’re based in 🌏 India · Available globally</p>
+            <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+              <a class="btn" href="#" aria-label="Twitter">🐦</a>
+              <a class="btn" href="#" aria-label="Instagram">📸</a>
+              <a class="btn" href="#" aria-label="GitHub">🐙</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <small>© <span id="y"></span> Nebula. All rights reserved.</small>
+      <a href="#home" class="pill" aria-label="Back to top">↑ Back to top</a>
+    </div>
+  </footer>
+
+  <!-- Scripts (no dependencies) -->
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const nav = document.querySelector('header nav');
+    document.getElementById('menu').addEventListener('click', e => {
+      const open = nav.classList.toggle('open');
+      e.currentTarget.setAttribute('aria-expanded', String(open));
+    });
+
+    // Dark mode toggle with persistence
+    const themeBtn = document.getElementById('theme');
+    const key = 'nebula-theme';
+    const root = document.documentElement;
+    const setTheme = (mode) => {
+      if (mode === 'light') {
+        root.style.colorScheme = 'light';
+        document.body.dataset.theme = 'light';
+      } else {
+        root.style.colorScheme = 'dark';
+        document.body.dataset.theme = 'dark';
+      }
+      localStorage.setItem(key, mode);
+    };
+    const initial = localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(initial);
+    themeBtn.addEventListener('click', () => setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+    // Fake form submit demo
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const toast = document.createElement('div');
+      toast.textContent = 'Thanks! We\'ll be in touch soon.';
+      Object.assign(toast.style, {
+        position: 'fixed', inset: 'auto 0 20px 0', margin: '0 auto', width: 'fit-content',
+        background: 'linear-gradient(90deg, rgba(124,58,237,.95), rgba(14,165,233,.95))',
+        color: '#fff', padding: '.8rem 1rem', borderRadius: '999px', boxShadow: '0 15px 30px rgba(0,0,0,.35)', zIndex: 99
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2400);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nebula — Unique One‑Page Website</title>
+  <meta name="description" content="A unique, modern, responsive one‑page website template with smooth animations and dark mode. Single-file HTML/CSS/JS." />
+  <meta property="og:title" content="Nebula — Unique One‑Page Website" />
+  <meta property="og:description" content="Modern, responsive, animated, and accessible. Copy → paste → customize." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.06);
+      --text: #eaf2ff;
+      --muted: #9db0c9;
+      --brand: #7c3aed;
+      --brand-2: #0ea5e9;
+      --ring: rgba(14,165,233,.65);
+      --card: rgba(255,255,255,.04);
+      --shadow: 0 10px 35px rgba(0,0,0,.28);
+      --radius: 22px;
+      --maxw: 1200px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fbff;
+        --panel: rgba(0, 41, 74, 0.06);
+        --text: #0d1b2a;
+        --muted: #465a6e;
+        --card: rgba(0,0,0,.035);
+        --shadow: 0 10px 35px rgba(2, 34, 62, .12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 75% -10%, rgba(124,58,237,.28), transparent 60%),
+                  radial-gradient(1200px 800px at -10% 80%, rgba(14,165,233,.28), transparent 60%),
+                  var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout */
+    .container { width: min(100% - 2rem, var(--maxw)); margin-inline: auto; }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
+    .brand {
+      display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; letter-spacing: .3px;
+    }
+    .brand svg { filter: drop-shadow(0 4px 10px rgba(124,58,237,.45)); }
+    .links { display: flex; gap: .6rem; align-items: center; }
+    .links a { padding: .6rem .9rem; border-radius: 999px; color: var(--muted); }
+    .links a:hover { color: var(--text); background: var(--panel); }
+    .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); box-shadow: var(--shadow); }
+    .btn.primary { border: 1px solid rgba(124,58,237,.6); background: linear-gradient(180deg, rgba(124,58,237,.85), rgba(14,165,233,.85)); color: white; }
+
+    .menu { display: none; }
+    @media (max-width: 840px) {
+      .links { display: none; }
+      .menu { display: inline-flex; }
+      nav.open .links { position: absolute; inset: 60px 1rem auto; display: grid; gap: .5rem; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.1); padding: .6rem; border-radius: 14px; backdrop-filter: blur(12px); }
+    }
+
+    /* Hero */
+    .hero { padding: 6rem 0 4rem; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .6rem; border-radius: 999px; background: var(--panel); color: var(--muted); border: 1px solid rgba(255,255,255,.08); }
+    .title { font-size: clamp(2rem, 6vw + .5rem, 4.2rem); line-height: 1.05; margin: 1rem 0; font-weight: 800; letter-spacing: -0.02em; }
+    .title .gradient { background: linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: clamp(1rem, 1.2vw + .9rem, 1.25rem); color: var(--muted); max-width: 70ch; margin: 0 auto 1.4rem; }
+    .cta { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; margin-top: 1.2rem; }
+
+    /* Sections */
+    section { padding: 4rem 0; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.2rem; }
+    .feat { grid-column: span 4; }
+    @media (max-width: 1000px) { .feat { grid-column: span 6; } }
+    @media (max-width: 640px) { .feat { grid-column: span 12; } }
+    .icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(124,58,237,.3), rgba(14,165,233,.3)); border: 1px solid rgba(255,255,255,.15); }
+
+    /* Showcase */
+    .showcase .item { grid-column: span 6; position: relative; overflow: hidden; }
+    @media (max-width: 840px) { .showcase .item { grid-column: span 12; } }
+    .mock { aspect-ratio: 16/10; border-radius: var(--radius); background: linear-gradient(135deg, rgba(124,58,237,.25), rgba(14,165,233,.25)); border: 1px solid rgba(255,255,255,.12); position: relative; overflow: hidden; }
+    .mock:before { content: ""; position: absolute; inset: -40% -20% auto; height: 80%; background: radial-gradient(closest-side, rgba(255,255,255,.6), transparent 70%); transform: rotate(25deg); filter: blur(20px); }
+
+    /* Pricing */
+    .pricing .plan { grid-column: span 4; position: relative; overflow: hidden; }
+    @media (max-width: 1000px) { .pricing .plan { grid-column: span 6; } }
+    @media (max-width: 640px) { .pricing .plan { grid-column: span 12; } }
+    .plan.featured { outline: 2px solid var(--ring); }
+    .price { font-weight: 800; font-size: 2rem; }
+    .muted { color: var(--muted); }
+
+    /* FAQ */
+    .faq details { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1rem 1.2rem; background: var(--card); }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .faq details + details { margin-top: .8rem; }
+
+    /* Contact */
+    form { display: grid; gap: .8rem; }
+    input, textarea { width: 100%; padding: .9rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); color: var(--text); outline: none; }
+    input:focus, textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 6px rgba(14,165,233,.12); }
+
+    /* Footer */
+    footer { padding: 2.5rem 0 3rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); }
+
+    /* Animations */
+    [data-reveal] { opacity: 0; transform: translateY(14px); transition: .6s ease; }
+    [data-reveal].visible { opacity: 1; transform: none; }
+
+    /* Utility */
+    .center { text-align: center; }
+    .pill { padding: .4rem .7rem; border-radius: 999px; background: var(--panel); border: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Nebula Home">
+          <!-- Simple SVG mark -->
+          <svg width="28" height="28" viewBox="0 0 60 60" aria-hidden="true" role="img" fill="none">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7c3aed"/>
+                <stop offset="1" stop-color="#0ea5e9"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="48" height="48" rx="12" stroke="url(#g)" stroke-width="4"/>
+            <circle cx="30" cy="30" r="10" fill="url(#g)"/>
+          </svg>
+          <span>Nebula</span>
+        </a>
+        <div class="links" role="menubar">
+          <a role="menuitem" href="#about">About</a>
+          <a role="menuitem" href="#work">Work</a>
+          <a role="menuitem" href="#pricing">Pricing</a>
+          <a role="menuitem" href="#faq">FAQ</a>
+          <a role="menuitem" href="#contact" class="pill">Contact</a>
+        </div>
+        <div style="display:flex; gap:.5rem; align-items:center;">
+          <button class="btn" id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">🌓</button>
+          <button class="btn menu" id="menu" aria-expanded="false" aria-controls="mobile">☰</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="hero">
+      <div class="container" data-reveal>
+        <span class="eyebrow">🚀 Unique • Responsive • Single‑file</span>
+        <h1 class="title">Build something <span class="gradient">beautiful</span> & fast.</h1>
+        <p class="sub">Nebula is a clean, modern one‑page layout with glassy cards, smooth reveal animations, dark mode, and zero dependencies. Copy the file, change the content, ship your site.</p>
+        <div class="cta">
+          <a href="#about" class="btn primary">Get Started</a>
+          <a href="#work" class="btn" aria-label="See our work examples">See Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="about">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Why choose Nebula?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Thoughtful features, zero bloat</h2>
+        </div>
+        <div class="grid">
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">⚡</div>
+            <h3>Fast & Lightweight</h3>
+            <p class="muted">Under a few KB of custom CSS with no frameworks. Loads quickly on any device.
+            </p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🎯</div>
+            <h3>Accessible</h3>
+            <p class="muted">Semantic HTML, clear focus styles, and ARIA where it matters for great UX.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🌗</div>
+            <h3>Dark Mode</h3>
+            <p class="muted">Respects system preference and lets users toggle anytime.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧩</div>
+            <h3>Modular Sections</h3>
+            <p class="muted">Swap blocks in or out: showcase, pricing, testimonials, FAQ, and contact.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <h3>SEO‑Ready</h3>
+            <p class="muted">Optimized meta tags, clean markup, and fast performance by default.</p>
+          </article>
+          <article class="card feat" data-reveal>
+            <div class="icon" aria-hidden="true">🧪</div>
+            <h3>Pure HTML/CSS/JS</h3>
+            <p class="muted">One file, no build step. Perfect for quick launches and prototypes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section id="work" class="showcase">
+      <div class="container">
+        <div class="grid">
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Project Aurora</h3>
+              <p class="muted">Elegant SaaS landing with conversion‑focused sections and crisp CTAs.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Retail Prism</h3>
+              <p class="muted">Product grid with hover reveals, quick‑view, and delightful motion.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Course Atlas</h3>
+              <p class="muted">Education template with curriculum blocks and evergreen lead magnets.</p>
+            </div>
+          </div>
+          <div class="item" data-reveal>
+            <div class="mock"></div>
+            <div class="card" style="margin-top:.8rem;">
+              <h3>Studio Folio</h3>
+              <p class="muted">Minimal portfolio with case studies, process, and client testimonials.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="center" style="margin-bottom:1.5rem;" data-reveal>
+          <span class="pill">Simple, transparent pricing</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">Pick a plan, own your site</h2>
+        </div>
+        <div class="grid">
+          <div class="card plan" data-reveal>
+            <h3>Starter</h3>
+            <p class="muted">Great for personal sites</p>
+            <p class="price">₹0</p>
+            <ul class="muted">
+              <li>Single‑file HTML</li>
+              <li>Responsive layout</li>
+              <li>Light/Dark mode</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Get it</a>
+            </div>
+          </div>
+          <div class="card plan featured" data-reveal>
+            <h3>Pro</h3>
+            <p class="muted">For small businesses</p>
+            <p class="price">₹1,999</p>
+            <ul class="muted">
+              <li>All Starter features</li>
+              <li>Extra sections & icons</li>
+              <li>Email support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn primary" href="#contact">Upgrade</a>
+            </div>
+          </div>
+          <div class="card plan" data-reveal>
+            <h3>Ultimate</h3>
+            <p class="muted">For agencies</p>
+            <p class="price">₹4,999</p>
+            <ul class="muted">
+              <li>Unlimited projects</li>
+              <li>Custom components</li>
+              <li>Priority support</li>
+            </ul>
+            <div style="margin-top:1rem;">
+              <a class="btn" href="#contact">Contact sales</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section>
+      <div class="container">
+        <blockquote class="card" style="font-size:1.1rem;" data-reveal>
+          “We shipped our MVP in a single afternoon with Nebula. The animations and dark mode made it feel premium out of the box.”
+          <footer class="muted" style="margin-top:.6rem;">— Mira J., Product Designer</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <div class="container">
+        <div class="center" style="margin-bottom:1rem;" data-reveal>
+          <span class="pill">Got questions?</span>
+          <h2 style="margin:.6rem 0 0; font-size:clamp(1.6rem,2.6vw,2.2rem);">FAQ</h2>
+        </div>
+        <details data-reveal>
+          <summary>Can I use this template commercially?</summary>
+          <p class="muted">Yes. Customize and reuse it across your projects. Attribution appreciated but not required.</p>
+        </details>
+        <details data-reveal>
+          <summary>How do I change colors and fonts?</summary>
+          <p class="muted">Tweak the <code>:root</code> CSS variables for colors and update the <code>font-family</code> on <code>body</code>.</p>
+        </details>
+        <details data-reveal>
+          <summary>Is there a backend for the contact form?</summary>
+          <p class="muted">This file is static. Hook it to services like Formspree or your own API. The demo JavaScript shows a success toast.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="grid">
+          <div class="card" style="grid-column: span 7;" data-reveal>
+            <h3>Let’s build your site</h3>
+            <p class="muted">Tell us a bit about your project and we’ll get back within 1 business day.</p>
+            <form id="contactForm">
+              <label>
+                <span class="muted">Name</span>
+                <input required name="name" placeholder="Your full name" />
+              </label>
+              <label>
+                <span class="muted">Email</span>
+                <input required type="email" name="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                <span class="muted">Message</span>
+                <textarea required name="message" rows="5" placeholder="What are you building?"></textarea>
+              </label>
+              <button class="btn primary" type="submit">Send message</button>
+            </form>
+          </div>
+          <aside class="card" style="grid-column: span 5;" data-reveal>
+            <h4>Contact details</h4>
+            <p class="muted">Prefer email? <a href="mailto:hello@example.com" class="pill">hello@example.com</a></p>
+            <p class="muted">We’re based in 🌏 India · Available globally</p>
+            <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+              <a class="btn" href="#" aria-label="Twitter">🐦</a>
+              <a class="btn" href="#" aria-label="Instagram">📸</a>
+              <a class="btn" href="#" aria-label="GitHub">🐙</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <small>© <span id="y"></span> Nebula. All rights reserved.</small>
+      <a href="#home" class="pill" aria-label="Back to top">↑ Back to top</a>
+    </div>
+  </footer>
+
+  <!-- Scripts (no dependencies) -->
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const nav = document.querySelector('header nav');
+    document.getElementById('menu').addEventListener('click', e => {
+      const open = nav.classList.toggle('open');
+      e.currentTarget.setAttribute('aria-expanded', String(open));
+    });
+
+    // Dark mode toggle with persistence
+    const themeBtn = document.getElementById('theme');
+    const key = 'nebula-theme';
+    const root = document.documentElement;
+    const setTheme = (mode) => {
+      if (mode === 'light') {
+        root.style.colorScheme = 'light';
+        document.body.dataset.theme = 'light';
+      } else {
+        root.style.colorScheme = 'dark';
+        document.body.dataset.theme = 'dark';
+      }
+      localStorage.setItem(key, mode);
+    };
+    const initial = localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(initial);
+    themeBtn.addEventListener('click', () => setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+    // Fake form submit demo
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const toast = document.createElement('div');
+      toast.textContent = 'Thanks! We\'ll be in touch soon.';
+      Object.assign(toast.style, {
+        position: 'fixed', inset: 'auto 0 20px 0', margin: '0 auto', width: 'fit-content',
+        background: 'linear-gradient(90deg, rgba(124,58,237,.95), rgba(14,165,233,.95))',
+        color: '#fff', padding: '.8rem 1rem', borderRadius: '999px', boxShadow: '0 15px 30px rgba(0,0,0,.35)', zIndex: 99
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2400);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
